@@ -1,0 +1,38 @@
+$imagewidth: 250px;
+$font-size: 1em;
+
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+.body {
+  font-size: $font-size;
+}
+
+.list {
+  list-style-type: none;
+}
+
+.user {
+  width: $imagewidth;
+  border: solid 1px #aaa;
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 5% auto;
+}
+
+.logo {
+  width: $imagewidth;
+}
+
+.bio {
+  display: none;
+}
+
+.name {
+  text-align: center;
+  padding: .3em;
+}
