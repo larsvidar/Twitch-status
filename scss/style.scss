@@ -12,6 +12,10 @@ $font-size: 1em;
   font-size: $font-size;
 }
 
+h1 {
+  font-size: 2em;
+}
+
 .list {
   list-style-type: none;
 }
@@ -25,7 +29,10 @@ $font-size: 1em;
 }
 
 .logo {
+  position: relative;
   width: $imagewidth;
+  z-index: -10;
+  float: left;
 }
 
 .bio {
@@ -35,4 +42,38 @@ $font-size: 1em;
 .name {
   text-align: center;
   padding: .3em;
+}
+
+.tag {
+  position: absolute;
+  z-index: 10;
+}
+
+.status {
+  background: yellow;
+  margin: 20px 10px;
+  height: 25px;
+  width: 25px;
+  border: solid 1px #000;
+  border-radius: 50%;
+  box-shadow: 0 0 3px #fff,
+              0 0 5px #333,
+              3px 3px 8px #000;
+}
+
+.red {
+  background: red;
+}
+
+.green {
+  background: green;
+}
+
+.map {
+ display: inline-block;
+ margin-right: 50px;
+}
+
+.description {
+  margin-left: 30px;
 }

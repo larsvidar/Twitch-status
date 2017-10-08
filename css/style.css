@@ -6,6 +6,9 @@
 .body {
   font-size: 1em; }
 
+h1 {
+  font-size: 2em; }
+
 .list {
   list-style-type: none; }
 
@@ -17,7 +20,10 @@
   margin: 5% auto; }
 
 .logo {
-  width: 250px; }
+  position: relative;
+  width: 250px;
+  z-index: -10;
+  float: left; }
 
 .bio {
   display: none; }
@@ -25,5 +31,31 @@
 .name {
   text-align: center;
   padding: .3em; }
+
+.tag {
+  position: absolute;
+  z-index: 10; }
+
+.status {
+  background: yellow;
+  margin: 20px 10px;
+  height: 25px;
+  width: 25px;
+  border: solid 1px #000;
+  border-radius: 50%;
+  box-shadow: 0 0 3px #fff, 0 0 5px #333, 3px 3px 8px #000; }
+
+.red {
+  background: red; }
+
+.green {
+  background: green; }
+
+.map {
+  display: inline-block;
+  margin-right: 50px; }
+
+.description {
+  margin-left: 30px; }
 
 /*# sourceMappingURL=style.css.map */
