@@ -16,18 +16,18 @@ function getUser(user, values) {
     values.forEach(function(item) {
       result[item] = data[item];
     });
-    getChannel(user, ["status"], result);
-  });
-}
-
-function getChannel(user, values, result) {
-  $.getJSON(makeURL("channels", user), function(data) {
-    values.forEach(function(item) {
-      result[item] = data[item];
-    });
     getStream(user, ["stream"], result);
   });
 }
+
+// function getChannel(user, values, result) {
+//   $.getJSON(makeURL("channels", user), function(data) {
+//     values.forEach(function(item) {
+//       result[item] = data[item];
+//     });
+//     getStream(user, ["stream"], result);
+//   });
+// }
 
 function getStream(user, values, results) {
   $.getJSON(makeURL("streams", user), function(data) {
@@ -77,6 +77,14 @@ $(".map").on("click", function() {
   }
 });
 
-// $.getJSON("https://api.twitch.tv/kraken/users?login=dallas,dallasnchains", function(data) {
-//   console.log(data);
+// $.ajax({
+//  type: 'GET',
+//  datatype: 'jsonp',
+//  url: 'https://api.twitch.tv/kraken/channels/' + twitchUsers[0],
+//  headers: {
+//    'Client-ID': 'axjhfp777tflhy0yjb5sftsil',
+//  },
+//  success: function(data) {
+//    console.log(data);
+//  }
 // });
