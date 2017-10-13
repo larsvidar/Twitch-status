@@ -66,30 +66,27 @@ function showUser(results) {
   $("#user-list").html(content);
 }
 
-function wait(secs) {
-  let date = new Date();
-  let now = date.getSeconds() + secs;
-  let seconds = date.getSeconds();
-  console.log(now);
-  for (let i = 0; i < 20000; i++) {
-    date = new Date();
-    seconds = date.getSeconds();
-    if (seconds < now) {
-      console.log(seconds);
-      break;
-    }
-  }
-}
 
 
 
 $("#user-list").html("<h2 class='text-center'>Loading data from Twitch. Please wait!</h2>");
 
-twitchUsers.forEach(function(userName) {
-    //getUser(userName, ["display_name", "bio", "logo"]);
-    console.log(userName);
-    wait(2);
-});
+// twitchUsers.forEach(function(userName) {
+//       getUser(userName, ["display_name", "bio", "logo"]);
+// });
+
+let count = 0;
+getUser(twitchUsers[count], ["display_name", "bio", "logo"]);
+count++;
+userListing = setInterval(function() {
+  getUser(twitchUsers[count], ["display_name", "bio", "logo"]);
+  count++;
+  if (count === 10) {
+    clearInterval(userListing);
+  }
+}, 1000);
+
+
 
 $(".map").on("click", function() {
   if ($(this).hasClass("green")) {
