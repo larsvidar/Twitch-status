@@ -31,7 +31,17 @@ h1 {
 
 .name {
   text-align: center;
-  padding: .3em; }
+  padding: .3em;
+  text-decoration: none;
+  color: black; }
+  .name:hover {
+    color: #aaa; }
+
+a {
+  z-index: 5; }
+
+a:hover {
+  text-decoration: none; }
 
 .tag {
   position: absolute;
@@ -45,12 +55,18 @@ h1 {
   border: solid 1px #000;
   border-radius: 50%;
   box-shadow: 0 0 3px #fff, 0 0 5px #333, 3px 3px 8px #000; }
+  .status:hover {
+    background: #cccc00; }
 
 .red {
   background: red; }
+  .red:hover {
+    background: #cc0000; }
 
 .green {
   background: green; }
+  .green:hover {
+    background: #004d00; }
 
 .map {
   display: inline-block;

@@ -43,11 +43,30 @@ h1 {
 .name {
   text-align: center;
   padding: .3em;
+  text-decoration: none;
+  color: black;
+  &:hover {
+    color: #aaa;
+  }
+}
+
+a {
+  z-index: 5;
+}
+
+a:hover {
+  text-decoration: none;
 }
 
 .tag {
   position: absolute;
   z-index: 10;
+}
+
+@mixin btn-hover($color) {
+  &:hover {
+    background: darken($color, 10%);
+  }
 }
 
 .status {
@@ -60,14 +79,17 @@ h1 {
   box-shadow: 0 0 3px #fff,
               0 0 5px #333,
               3px 3px 8px #000;
+  @include btn-hover(yellow);
 }
 
 .red {
   background: red;
+  @include btn-hover(red);
 }
 
 .green {
   background: green;
+  @include btn-hover(green);
 }
 
 .map {
