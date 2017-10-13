@@ -1,8 +1,8 @@
 console.log("Twitchstatus.js loaded!");
 
-const twitchUsers = ["larsvidar", "freecodecamp", "anniefuchsia", "esl_sc2", "esl_csgo", "kig666", "emzia", "voyboy", "strippin", "robotcaleb"];
+const twitchUsers = ["freecodecamp", "larsvidar", "anniefuchsia", "esl_sc2", "esl_csgo", "kig666", "emzia", "voyboy", "strippin", "robotcaleb"];
 const defaultImage = "img/twitch-logo.png";
-let content = "";
+let html = [];
 
 function makeURL(type, user) {
   // type = "users", "channels" or "streams"
@@ -20,15 +20,6 @@ function getUser(user, values) {
   });
 }
 
-// function getChannel(user, values, result) {
-//   $.getJSON(makeURL("channels", user), function(data) {
-//     values.forEach(function(item) {
-//       result[item] = data[item];
-//     });
-//     getStream(user, ["stream"], result);
-//   });
-// }
-
 function getStream(user, values, results) {
   $.getJSON(makeURL("streams", user), function(data) {
     values.forEach(function(item) {
@@ -39,10 +30,8 @@ function getStream(user, values, results) {
 }
 
 
-
 function showUser(results) {
-  console.log(results);
-  content += `
+  let content = `
 <li class="user">
   <a href="https://go.twitch.tv/${results.display_name}" target="_blank">
     <h3 class="name">${results.display_name}</h3>
@@ -57,13 +46,15 @@ function showUser(results) {
   }
 
   if (results.stream != null) {
-    content += `<div class="status tag green"></div>`;
+    content += `<div class="status tag green"><p class="stream-info">${results.stream.game}</p></div>`;
   } else {
     content += `<div class="status tag red"></div>`;
   }
   content += `</li>`;
 
-  $("#user-list").html(content);
+  html.push(content);
+
+  $("#user-list").html(html);
 }
 
 
