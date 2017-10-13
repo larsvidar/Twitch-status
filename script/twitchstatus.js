@@ -11,14 +11,24 @@ function makeURL(type, user) {
 
 
 function getUser(user, values) {
-  $.getJSON(makeURL("users", user), function(data) {
-    var result={};
-    values.forEach(function(item) {
-      result[item] = data[item];
-    });
-    getStream(user, ["stream"], result);
+  $.ajax({
+    type: 'GET',
+    datatype: 'jsonp',
+    url: "https://api.twitch.tv/helix/users/" + user,
+    headers: {
+      'Client-ID': 'axjhfp777tflhy0yjb5sftsil',
+    },
+    success: function(data) {
+      console.log(data);
+      var result={};
+      values.forEach(function(item) {
+        result[item] = data[item];
+      });
+      getStream(user, ["stream"], result);
+    }
   });
 }
+
 
 function getStream(user, values, results) {
   $.getJSON(makeURL("streams", user), function(data) {
@@ -62,20 +72,20 @@ function showUser(results) {
 
 $("#user-list").html("<h2 class='text-center'>Loading data from Twitch. Please wait!</h2>");
 
-// twitchUsers.forEach(function(userName) {
-//       getUser(userName, ["display_name", "bio", "logo"]);
-// });
+twitchUsers.forEach(function(userName) {
+      getUser(userName, ["display_name", "bio", "logo"]);
+});
 
-let count = 0;
-getUser(twitchUsers[count], ["display_name", "bio", "logo"]);
-count++;
-userListing = setInterval(function() {
-  getUser(twitchUsers[count], ["display_name", "bio", "logo"]);
-  count++;
-  if (count === 10) {
-    clearInterval(userListing);
-  }
-}, 1000);
+// let count = 0;
+// getUser(twitchUsers[count], ["display_name", "bio", "logo"]);
+// count++;
+// userListing = setInterval(function() {
+//   getUser(twitchUsers[count], ["display_name", "bio", "logo"]);
+//   count++;
+//   if (count === 10) {
+//     clearInterval(userListing);
+//   }
+// }, 1000);
 
 
 
