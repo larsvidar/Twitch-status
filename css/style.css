@@ -31,7 +31,17 @@ h1 {
 
 .name {
   text-align: center;
-  padding: .3em; }
+  padding: .3em;
+  text-decoration: none;
+  color: black; }
+  .name:hover {
+    color: #aaa; }
+
+a {
+  z-index: 5; }
+
+a:hover {
+  text-decoration: none; }
 
 .tag {
   position: absolute;

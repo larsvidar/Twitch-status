@@ -42,27 +42,53 @@ function getStream(user, values, results) {
 
 function showUser(results) {
   console.log(results);
-  content += "<li class='user'>";
-  content += "<h3 class='name'>" + results.display_name + "</h3>";
-  content += "<p class='bio'>" + results.bio + "</p>"
+  content += `
+<li class="user">
+  <a href="https://go.twitch.tv/${results.display_name}" target="_blank">
+    <h3 class="name">${results.display_name}</h3>
+  </a>
+  <p class='bio'>${results.bio}</p>
+  <a href="https://go.twitch.tv/${results.display_name}" target="_blank">`
+
   if (results.logo != null) {
-    content += "<img class='logo mr-0' src='" + results.logo + "'>";
+    content += `<img class="logo mr-0" src="${results.logo}">`;
   } else {
-    content += "<img class='logo mr-0' src='" + defaultImage + "'>";
+    content += `<img class="logo mr-0" src="${defaultImage}">`;
   }
+
   if (results.stream != null) {
-    content += "<div class='status tag green'></div>";
+    content += `<div class="status tag green"></div>`;
   } else {
-    content += "<div class='status tag red'></div>";
+    content += `<div class="status tag red"></div>`;
   }
-  content += "</li>"
+  content += `</li>`;
+
   $("#user-list").html(content);
 }
 
-$("#user-list").html("<h2>Loading data from Twitch. Please wait!</h2>");
+function wait(secs) {
+  let date = new Date();
+  let now = date.getSeconds() + secs;
+  let seconds = date.getSeconds();
+  console.log(now);
+  for (let i = 0; i < 20000; i++) {
+    date = new Date();
+    seconds = date.getSeconds();
+    if (seconds < now) {
+      console.log(seconds);
+      break;
+    }
+  }
+}
+
+
+
+$("#user-list").html("<h2 class='text-center'>Loading data from Twitch. Please wait!</h2>");
 
 twitchUsers.forEach(function(userName) {
-  getUser(userName, ["display_name", "bio", "logo"]);
+    //getUser(userName, ["display_name", "bio", "logo"]);
+    console.log(userName);
+    wait(2);
 });
 
 $(".map").on("click", function() {
@@ -80,7 +106,7 @@ $(".map").on("click", function() {
 // $.ajax({
 //  type: 'GET',
 //  datatype: 'jsonp',
-//  url: 'https://api.twitch.tv/kraken/channels/' + twitchUsers[0],
+//  url: 'https://api.twitch.tv/kraken/streams/' + twitchUsers[3],
 //  headers: {
 //    'Client-ID': 'axjhfp777tflhy0yjb5sftsil',
 //  },
