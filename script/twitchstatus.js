@@ -2,36 +2,47 @@ console.log("Twitchstatus.js loaded!");
 
 const twitchUsers = ["freecodecamp", "larsvidar", "anniefuchsia", "esl_sc2", "esl_csgo", "kig666", "emzia", "voyboy", "strippin", "robotcaleb"];
 const defaultImage = "img/twitch-logo.png";
+const twitchApiKey = "rctgrgi8iefum0m5v3etvuqmtmasbd";
 let html = [];
 
 function makeURL(type, user) {
   // type = "users", "channels" or "streams"
-  return "https://wind-bow.gomix.me/twitch-api/" + type + "/" + user + "?callback=?";
+  return "https://api.twitch.tv/kraken/" + type + "/" + user;
+}
+
+function ajaxCall(type, user) {
+  return Promise.resolve($.ajax({
+    type: 'GET',
+    datatype: 'jsonp',
+    url: makeURL(type, user),
+    headers: {
+      'Client-ID': twitchApiKey,
+    }
+    // success: function(data) {
+    //   console.log(data);
+    // }
+  }));
 }
 
 
 function getUser(user, values) {
-  $.ajax({
-    type: 'GET',
-    datatype: 'jsonp',
-    url: "https://api.twitch.tv/helix/users/" + user,
-    headers: {
-      'Client-ID': 'axjhfp777tflhy0yjb5sftsil',
-    },
-    success: function(data) {
-      console.log(data);
-      var result={};
-      values.forEach(function(item) {
-        result[item] = data[item];
-      });
-      getStream(user, ["stream"], result);
-    }
+  let response = ajaxCall("users", user);
+  response.then(function(data) {
+    console.log(data);
+    var result={};
+    values.forEach(function(item) {
+      result[item] = data[item];
+    });
+    getStream(user, ["stream"], result);
+  }).catch(function(error) {
+    throw error.responseText;
   });
 }
 
 
 function getStream(user, values, results) {
-  $.getJSON(makeURL("streams", user), function(data) {
+  let response = ajaxCall("streams", user);
+  response.then(function(data) {
     values.forEach(function(item) {
       results[item] = data[item];
     });
@@ -41,13 +52,12 @@ function getStream(user, values, results) {
 
 
 function showUser(results) {
-  let content = `
-<li class="user">
-  <a href="https://go.twitch.tv/${results.display_name}" target="_blank">
-    <h3 class="name">${results.display_name}</h3>
-  </a>
-  <p class='bio'>${results.bio}</p>
-  <a href="https://go.twitch.tv/${results.display_name}" target="_blank">`
+  let content = `<li class="user">
+    <a href="https://go.twitch.tv/${results.display_name}" target="_blank">
+      <h3 class="name">${results.display_name}</h3>
+    </a>
+    <p class='bio'>${results.bio}</p>
+    <a href="https://go.twitch.tv/${results.display_name}" target="_blank">`
 
   if (results.logo != null) {
     content += `<img class="logo mr-0" src="${results.logo}">`;
@@ -72,20 +82,20 @@ function showUser(results) {
 
 $("#user-list").html("<h2 class='text-center'>Loading data from Twitch. Please wait!</h2>");
 
-twitchUsers.forEach(function(userName) {
-      getUser(userName, ["display_name", "bio", "logo"]);
-});
+// twitchUsers.forEach(function(userName) {
+//       getUser(userName, ["display_name", "bio", "logo"]);
+// });
 
-// let count = 0;
-// getUser(twitchUsers[count], ["display_name", "bio", "logo"]);
-// count++;
-// userListing = setInterval(function() {
-//   getUser(twitchUsers[count], ["display_name", "bio", "logo"]);
-//   count++;
-//   if (count === 10) {
-//     clearInterval(userListing);
-//   }
-// }, 1000);
+let count = 0;
+getUser(twitchUsers[count], ["display_name", "bio", "logo"]);
+count++;
+userListing = setInterval(function() {
+  getUser(twitchUsers[count], ["display_name", "bio", "logo"]);
+  count++;
+  if (count === 10) {
+    clearInterval(userListing);
+  }
+}, 500);
 
 
 
