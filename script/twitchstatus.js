@@ -55,9 +55,7 @@ function showUser(results) {
   let content = `<li class="user">
     <a href="https://go.twitch.tv/${results.display_name}" target="_blank">
       <h3 class="name">${results.display_name}</h3>
-    </a>
-    <p class='bio'>${results.bio}</p>
-    <a href="https://go.twitch.tv/${results.display_name}" target="_blank">`
+    </a>`
 
   if (results.logo != null) {
     content += `<img class="logo mr-0" src="${results.logo}">`;
@@ -68,8 +66,15 @@ function showUser(results) {
   if (results.stream != null) {
     content += `<div class="status tag green"><p class="stream-info">${results.stream.game}</p></div>`;
   } else {
-    content += `<div class="status tag red"></div>`;
+    content += `<div class="status tag red"><p class="stream-info">No stream!</p></div>`;
   }
+
+  if (results.bio != null) {
+    content += `<p class='bio'>${results.bio}</p>`
+  } else {
+    content += `<p class='bio'>This user has no bio.</p>`
+  }
+
   content += `</li>`;
 
   html.push(content);
@@ -82,9 +87,6 @@ function showUser(results) {
 
 $("#user-list").html("<h2 class='text-center'>Loading data from Twitch. Please wait!</h2>");
 
-// twitchUsers.forEach(function(userName) {
-//       getUser(userName, ["display_name", "bio", "logo"]);
-// });
 
 let count = 0;
 getUser(twitchUsers[count], ["display_name", "bio", "logo"]);
@@ -110,15 +112,3 @@ $(".map").on("click", function() {
     $(".status").closest(".user").css("display", "block");
   }
 });
-
-// $.ajax({
-//  type: 'GET',
-//  datatype: 'jsonp',
-//  url: 'https://api.twitch.tv/kraken/streams/' + twitchUsers[3],
-//  headers: {
-//    'Client-ID': 'axjhfp777tflhy0yjb5sftsil',
-//  },
-//  success: function(data) {
-//    console.log(data);
-//  }
-// });

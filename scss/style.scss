@@ -1,6 +1,28 @@
+/***** VARIABLES *****/
+
 $imagewidth: 250px;
 $font-size: 1em;
 
+// Breakpoints
+$breakpoints: (
+  "small": 375px,
+  "medium-small": 414px,
+  "medium": 632px,
+  "medium-large": 700px,
+  "large": 800px,
+  "extra-large": 1305px,
+);
+
+
+/***** MIXINS *****/
+
+@mixin btn-hover($color) {
+  &:hover {
+    background: darken($color, 10%);
+  }
+}
+
+/***** GENERAL LAYOUT *****/
 
 * {
   box-sizing: border-box;
@@ -21,35 +43,6 @@ h1 {
   list-style-type: none;
 }
 
-.user {
-  width: $imagewidth;
-  border: solid 1px #aaa;
-  border-radius: 10px;
-  overflow: hidden;
-  margin: 5% auto;
-}
-
-.logo {
-  position: relative;
-  width: $imagewidth;
-  z-index: -10;
-  float: left;
-}
-
-.bio {
-  display: none;
-}
-
-.name {
-  text-align: center;
-  padding: .3em;
-  text-decoration: none;
-  color: black;
-  &:hover {
-    color: #aaa;
-  }
-}
-
 a {
   z-index: 5;
 }
@@ -58,16 +51,8 @@ a:hover {
   text-decoration: none;
 }
 
-.tag {
-  position: absolute;
-  z-index: 10;
-}
 
-@mixin btn-hover($color) {
-  &:hover {
-    background: darken($color, 10%);
-  }
-}
+/***** NAV *****/
 
 .status {
   background: yellow;
@@ -101,12 +86,139 @@ a:hover {
   margin-left: 30px;
 }
 
+
+/***** BOXES *****/
+
+.user {
+  width: 90%;
+  border: solid 1px #aaa;
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 5% auto;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, .7);
+}
+
+.logo {
+  width: 100%;
+  z-index: -10;
+  float: left;
+}
+
+/***** INFO *****/
+
+.name {
+  text-align: center;
+  padding: .3em;
+  text-decoration: none;
+  color: black;
+  &:hover {
+    color: #aaa;
+  }
+}
+
+.bio {
+  display: none;
+  z-index: 10;
+  width: 50%;
+  float: left;
+  padding: 0 10px;
+  text-align: left;
+}
+
 .stream-info {
-  display: block;
   width: 240px;
   color: white;
   text-align: left;
   padding-left: 35px;
   text-shadow: 2px 2px 5px black,
-               -1px -1px 3px black;
+               -1px -1px 3px black,
+               -1px 0 black,
+               0 1px black,
+               1px 0 black,
+               0 -1px black;
+}
+
+.tag {
+  position: absolute;
+  z-index: 10;
+}
+
+@media (min-width: map-get($breakpoints, "small")) {
+  .user {
+    width: 70%;
+  }
+}
+
+@media (min-width: map-get($breakpoints, "medium-small")) {
+  .user {
+    display: inline-block;
+    width: 45%;
+    margin: 2.5%
+  }
+}
+
+@media (min-width: map-get($breakpoints, "medium")) {
+  .bio {
+    display: block;
+  }
+
+  .user {
+    width: 90%;
+  }
+
+  .logo {
+    width: 50%;
+  }
+
+  .tag {
+    margin: 35% 45%;
+  }
+
+  .stream-info {
+      color: black;
+      width: 40vw;
+      text-shadow: 2px 2px 5px rgba(0, 0, 0, .7);
+  }
+}
+
+@media (min-width: map-get($breakpoints, "medium-large")) {
+  .user {
+    max-width: 780px;
+  }
+
+  .logo {
+    width: 250px;
+  }
+
+  .bio {
+    max-width: 500px;
+  }
+
+  .tag {
+    position: static;
+    display: block;
+    margin: 0 0 10px 260px;
+  }
+}
+
+@media (min-width: map-get($breakpoints, "large")) {
+  .user {
+
+  }
+
+  .bio {
+
+  }
+
+  .logo {
+    width: 200px;
+  }
+}
+
+@media (min-width: map-get($breakpoints, "extra-large")) {
+  .user {
+    width: 40%;
+    margin: 20px;
+    max-width: 600px;
+  }
 }

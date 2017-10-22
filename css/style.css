@@ -1,3 +1,6 @@
+/***** VARIABLES *****/
+/***** MIXINS *****/
+/***** GENERAL LAYOUT *****/
 * {
   box-sizing: border-box;
   padding: 0;
@@ -13,40 +16,13 @@ h1 {
 .list {
   list-style-type: none; }
 
-.user {
-  width: 250px;
-  border: solid 1px #aaa;
-  border-radius: 10px;
-  overflow: hidden;
-  margin: 5% auto; }
-
-.logo {
-  position: relative;
-  width: 250px;
-  z-index: -10;
-  float: left; }
-
-.bio {
-  display: none; }
-
-.name {
-  text-align: center;
-  padding: .3em;
-  text-decoration: none;
-  color: black; }
-  .name:hover {
-    color: #aaa; }
-
 a {
   z-index: 5; }
 
 a:hover {
   text-decoration: none; }
 
-.tag {
-  position: absolute;
-  z-index: 10; }
-
+/***** NAV *****/
 .status {
   background: yellow;
   margin: 20px 10px;
@@ -75,12 +51,94 @@ a:hover {
 .description {
   margin-left: 30px; }
 
+/***** BOXES *****/
+.user {
+  width: 90%;
+  border: solid 1px #aaa;
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 5% auto;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.7); }
+
+.logo {
+  width: 100%;
+  z-index: -10;
+  float: left; }
+
+/***** INFO *****/
+.name {
+  text-align: center;
+  padding: .3em;
+  text-decoration: none;
+  color: black; }
+  .name:hover {
+    color: #aaa; }
+
+.bio {
+  display: none;
+  z-index: 10;
+  width: 50%;
+  float: left;
+  padding: 0 10px;
+  text-align: left; }
+
 .stream-info {
-  display: block;
   width: 240px;
   color: white;
   text-align: left;
   padding-left: 35px;
-  text-shadow: 2px 2px 5px black, -1px -1px 3px black; }
+  text-shadow: 2px 2px 5px black, -1px -1px 3px black, -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black; }
+
+.tag {
+  position: absolute;
+  z-index: 10; }
+
+@media (min-width: 375px) {
+  .user {
+    width: 70%; } }
+@media (min-width: 414px) {
+  .user {
+    display: inline-block;
+    width: 45%;
+    margin: 2.5%; } }
+@media (min-width: 632px) {
+  .bio {
+    display: block; }
+
+  .user {
+    width: 90%; }
+
+  .logo {
+    width: 50%; }
+
+  .tag {
+    margin: 35% 45%; }
+
+  .stream-info {
+    color: black;
+    width: 40vw;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7); } }
+@media (min-width: 700px) {
+  .user {
+    max-width: 780px; }
+
+  .logo {
+    width: 250px; }
+
+  .bio {
+    max-width: 500px; }
+
+  .tag {
+    position: static;
+    display: block;
+    margin: 0 0 10px 260px; } }
+@media (min-width: 800px) {
+  .logo {
+    width: 200px; } }
+@media (min-width: 1305px) {
+  .user {
+    width: 40%;
+    margin: 20px;
+    max-width: 600px; } }
 
 /*# sourceMappingURL=style.css.map */
