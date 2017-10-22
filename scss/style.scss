@@ -197,19 +197,11 @@ a:hover {
   .tag {
     position: static;
     display: block;
-    margin: 0 0 10px 260px;
+    margin: 0 0 10px 210px;
   }
 }
 
 @media (min-width: map-get($breakpoints, "large")) {
-  .user {
-
-  }
-
-  .bio {
-
-  }
-
   .logo {
     width: 200px;
   }

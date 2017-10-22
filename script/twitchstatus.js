@@ -28,7 +28,6 @@ function ajaxCall(type, user) {
 function getUser(user, values) {
   let response = ajaxCall("users", user);
   response.then(function(data) {
-    console.log(data);
     var result={};
     values.forEach(function(item) {
       result[item] = data[item];
@@ -52,7 +51,7 @@ function getStream(user, values, results) {
 
 
 function showUser(results) {
-  let content = `<li class="user">
+  let content = `<li class="user col-12 col-xs-6">
     <a href="https://go.twitch.tv/${results.display_name}" target="_blank">
       <h3 class="name">${results.display_name}</h3>
     </a>`
