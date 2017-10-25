@@ -51,16 +51,9 @@ function getStream(user, values, results) {
 
 
 function showUser(results) {
-  let content = `<li class="user col-12 col-xs-6">
+  let content = `<li class="user">
     <a href="https://go.twitch.tv/${results.display_name}" target="_blank">
-      <h3 class="name">${results.display_name}</h3>
-    </a>`
-
-  if (results.logo != null) {
-    content += `<img class="logo mr-0" src="${results.logo}">`;
-  } else {
-    content += `<img class="logo mr-0" src="${defaultImage}">`;
-  }
+      <h3>${results.display_name}</h3>`
 
   if (results.stream != null) {
     content += `<div class="status tag green"><p class="stream-info">${results.stream.game}</p></div>`;
@@ -68,10 +61,18 @@ function showUser(results) {
     content += `<div class="status tag red"><p class="stream-info">No stream!</p></div>`;
   }
 
-  if (results.bio != null) {
-    content += `<p class='bio'>${results.bio}</p>`
+  if (results.logo != null) {
+    content += `<img class="logo" src="${results.logo}">`;
   } else {
-    content += `<p class='bio'>This user has no bio.</p>`
+    content += `<img class="logo" src="${defaultImage}">`;
+  }
+
+  content += `</a>`;
+
+  if (results.bio != null) {
+    content += `<p class='bio hidden'>${results.bio}</p>`
+  } else {
+    content += `<p class='bio hidden'>This user has no bio.</p>`
   }
 
   content += `</li>`;
@@ -84,7 +85,7 @@ function showUser(results) {
 
 
 
-$("#user-list").html("<h2 class='text-center'>Loading data from Twitch. Please wait!</h2>");
+$("#user-list").html("<h2>Loading data from Twitch. Please wait!</h2>");
 
 
 let count = 0;
@@ -102,12 +103,12 @@ userListing = setInterval(function() {
 
 $(".map").on("click", function() {
   if ($(this).hasClass("green")) {
-    $(".status").closest(".user").css("display", "block");
-    $(".red").closest(".user").css("display", "none");
+    $(".status").closest(".user").removeClass("hide");
+    $(".red").closest(".user").addClass("hide");
   } else if ($(this).hasClass("red")) {
-    $(".status").closest(".user").css("display", "block");
-    $(".green").closest(".user").css("display", "none");
+    $(".status").closest(".user").removeClass("hide");
+    $(".green").closest(".user").addClass("hide");
   } else {
-    $(".status").closest(".user").css("display", "block");
+    $(".status").closest(".user").removeClass("hide");
   }
 });

@@ -1,26 +1,32 @@
-/***** VARIABLES *****/
-
+//***** VARIABLES *****
 $imagewidth: 250px;
 $font-size: 1em;
 
 // Breakpoints
 $breakpoints: (
-  "small": 375px,
-  "medium-small": 414px,
-  "medium": 632px,
+  "small": 500px,
+  "medium": 700px,
   "medium-large": 700px,
   "large": 800px,
   "extra-large": 1305px,
 );
 
 
-/***** MIXINS *****/
+//***** MIXINS *****
 
 @mixin btn-hover($color) {
   &:hover {
     background: darken($color, 10%);
   }
 }
+
+@mixin btn-push() {
+  &:active {
+    transform: translate(2px, 2px);
+    box-shadow: 1px 1px 5px #000;
+  }
+}
+
 
 /***** GENERAL LAYOUT *****/
 
@@ -30,41 +36,47 @@ $breakpoints: (
   margin: 0;
 }
 
-.body {
-  font-size: $font-size;
-}
-
-h1 {
-  font-size: 2em;
-  margin-top: .3em;
-}
-
-.list {
-  list-style-type: none;
+body {
+  overflow-x: hidden;
+  text-align: center;
 }
 
 a {
-  z-index: 5;
-}
-
-a:hover {
+  color: black;
   text-decoration: none;
+  &:hover {
+    color: #622;
+  }
 }
 
+h1 {
+  font-size: 10vw;
+  margin: 1% 0;
+}
+
+.hide {
+  position: absolute;
+  top: -9999px;
+}
 
 /***** NAV *****/
 
+.legend {
+  margin: 0 0 10px;
+}
+
 .status {
+  display: inline-block;
   background: yellow;
-  margin: 20px 10px;
-  height: 25px;
-  width: 25px;
+  height: 30px;
+  width: 20vw;
   border: solid 1px #000;
-  border-radius: 50%;
+  border-radius: 3px;
   box-shadow: 0 0 3px #fff,
               0 0 5px #333,
               3px 3px 8px #000;
   @include btn-hover(yellow);
+  @include btn-push();
 }
 
 .red {
@@ -78,139 +90,77 @@ a:hover {
 }
 
 .map {
- display: inline-block;
- margin-right: 50px;
+  margin: 0 20px 20px 10px;
 }
 
 .description {
-  margin-left: 30px;
+  margin: 4px 0 0 0;
+  text-shadow: 0 0 2px white;
 }
 
 
 /***** BOXES *****/
 
-.user {
+.list {
+  margin: 0 auto;
   width: 90%;
-  border: solid 1px #aaa;
-  border-radius: 10px;
-  overflow: hidden;
-  margin: 5% auto;
-  box-shadow: 5px 5px 5px rgba(0, 0, 0, .7);
+}
+
+.user {
+  display: inline-block;
+  list-style-type: none;
+  margin: 0 0 15px 0;
+  &:hover {
+    padding: 5px;
+    border: solid 1px blue;
+  }
 }
 
 .logo {
   width: 100%;
   z-index: -10;
-  float: left;
 }
 
-/***** INFO *****/
+.tag {
+  display: block;
+  width: auto;
+  border-radius: 0;
+  box-shadow: none;
 
-.name {
-  text-align: center;
-  padding: .3em;
-  text-decoration: none;
-  color: black;
-  &:hover {
-    color: #aaa;
-  }
+}
+
+.stream-info {
+  margin: 4px 5px 0;
 }
 
 .bio {
   display: none;
-  z-index: 10;
-  width: 50%;
-  float: left;
-  padding: 0 10px;
-  text-align: left;
 }
 
-.stream-info {
-  width: 240px;
-  color: white;
-  text-align: left;
-  padding-left: 35px;
-  text-shadow: 2px 2px 5px black,
-               -1px -1px 3px black,
-               -1px 0 black,
-               0 1px black,
-               1px 0 black,
-               0 -1px black;
-}
+/***** MEDIA QUERIES *****/
 
-.tag {
-  position: absolute;
-  z-index: 10;
-}
 
 @media (min-width: map-get($breakpoints, "small")) {
+  h1 {
+    font-size: 3.8em;
+  }
+
   .user {
-    width: 70%;
+    width: 50%;
+    padding: 10px;
   }
 }
 
-@media (min-width: map-get($breakpoints, "medium-small")) {
-  .user {
-    display: inline-block;
-    width: 45%;
-    margin: 2.5%
-  }
-}
+
+
 
 @media (min-width: map-get($breakpoints, "medium")) {
-  .bio {
-    display: block;
-  }
-
   .user {
-    width: 90%;
-  }
-
-  .logo {
-    width: 50%;
-  }
-
-  .tag {
-    margin: 35% 45%;
-  }
-
-  .stream-info {
-      color: black;
-      width: 40vw;
-      text-shadow: 2px 2px 5px rgba(0, 0, 0, .7);
-  }
-}
-
-@media (min-width: map-get($breakpoints, "medium-large")) {
-  .user {
-    max-width: 780px;
-  }
-
-  .logo {
-    width: 250px;
+    width: 33%;
+    max-width: 300px;
   }
 
   .bio {
-    max-width: 500px;
-  }
-
-  .tag {
-    position: static;
     display: block;
-    margin: 0 0 10px 210px;
-  }
-}
-
-@media (min-width: map-get($breakpoints, "large")) {
-  .logo {
-    width: 200px;
-  }
-}
-
-@media (min-width: map-get($breakpoints, "extra-large")) {
-  .user {
-    width: 40%;
-    margin: 20px;
-    max-width: 600px;
   }
 }
