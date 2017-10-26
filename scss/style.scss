@@ -6,21 +6,23 @@ $font-size: 1em;
 $breakpoints: (
   "small": 500px,
   "medium": 700px,
-  "medium-large": 700px,
-  "large": 800px,
-  "extra-large": 1305px,
 );
 
 
 //***** MIXINS *****
 
+// Makes buttons darker on hover.
 @mixin btn-hover($color) {
   &:hover {
     background: darken($color, 10%);
   }
 }
 
+// Animates buttons being pushed when clicked.
 @mixin btn-push() {
+  box-shadow: 0 0 3px #fff,
+              0 0 5px #333,
+              3px 3px 8px #000;
   &:active {
     transform: translate(2px, 2px);
     box-shadow: 1px 1px 5px #000;
@@ -30,6 +32,7 @@ $breakpoints: (
 
 /***** GENERAL LAYOUT *****/
 
+/* Reset */
 * {
   box-sizing: border-box;
   padding: 0;
@@ -39,6 +42,7 @@ $breakpoints: (
 body {
   overflow-x: hidden;
   text-align: center;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
 a {
@@ -54,10 +58,12 @@ h1 {
   margin: 1% 0;
 }
 
+/* Class for hiding elements off screen */
 .hide {
   position: absolute;
   top: -9999px;
 }
+
 
 /***** NAV *****/
 
@@ -72,9 +78,6 @@ h1 {
   width: 20vw;
   border: solid 1px #000;
   border-radius: 3px;
-  box-shadow: 0 0 3px #fff,
-              0 0 5px #333,
-              3px 3px 8px #000;
   @include btn-hover(yellow);
   @include btn-push();
 }
@@ -96,6 +99,10 @@ h1 {
 .description {
   margin: 4px 0 0 0;
   text-shadow: 0 0 2px white;
+}
+
+.grey {
+  background: #999;
 }
 
 
@@ -134,13 +141,16 @@ h1 {
 }
 
 .bio {
-  display: none;
+  display: block;
+  height: 75px;
+  overflow-y: auto;
 }
+
 
 /***** MEDIA QUERIES *****/
 
-
 @media (min-width: map-get($breakpoints, "small")) {
+  /* Making sure the title and the boxes don't grow to big on larger screens */
   h1 {
     font-size: 3.8em;
   }
@@ -151,16 +161,10 @@ h1 {
   }
 }
 
-
-
-
 @media (min-width: map-get($breakpoints, "medium")) {
+  /* Making boxes stop growing all togheter on large screens */
   .user {
     width: 33%;
     max-width: 300px;
-  }
-
-  .bio {
-    display: block;
   }
 }
