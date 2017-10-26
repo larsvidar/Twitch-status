@@ -55,7 +55,12 @@ a {
 
 h1 {
   font-size: 10vw;
-  margin: 1% 0;
+  padding: 0 0 15px;
+}
+
+header {
+  background: #6441a4;
+  color: white;
 }
 
 /* Class for hiding elements off screen */
@@ -69,6 +74,7 @@ h1 {
 
 .legend {
   margin: 0 0 10px;
+  background: #6441a4;
 }
 
 .status {
